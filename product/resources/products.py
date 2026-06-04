@@ -76,7 +76,7 @@ class OrderCreate(MethodView):
     def post(self, product_data):
         return create_product_from_payload(product_data)
 
-# more endpoints to be added
+# Change from master to main in jenkins configure
 # -------------------------------
 # Endpoint: /product/<product_id>
 # -------------------------------
