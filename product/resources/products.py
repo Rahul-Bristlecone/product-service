@@ -76,7 +76,7 @@ class OrderCreate(MethodView):
     def post(self, product_data):
         return create_product_from_payload(product_data)
 
-# Change from master to main in jenkins configure
+
 # -------------------------------
 # Endpoint: /product/<product_id>
 # -------------------------------
@@ -137,7 +137,7 @@ class OrderResource(MethodView):
 
         return {"message": "Product deleted successfully"}, 200
 
-# bitnami
+
 # -------------------------------
 # Endpoint: /products
 # -------------------------------
