@@ -64,7 +64,7 @@ def create_product_from_payload(product_data):
 
     return product
 
-
+# you are an idiot
 # -------------------------------
 # Endpoint: /create_product
 # -------------------------------
@@ -137,7 +137,7 @@ class OrderResource(MethodView):
 
         return {"message": "Product deleted successfully"}, 200
 
-
+# bitnami
 # -------------------------------
 # Endpoint: /products
 # -------------------------------
