@@ -23,3 +23,7 @@ def readiness():
 @health_bp.route("/liveness")
 def liveness():
     return jsonify(status="UP"), 200
+
+@health_bp.route("/startup")
+def startup():
+    return jsonify(status="UP"), 200
