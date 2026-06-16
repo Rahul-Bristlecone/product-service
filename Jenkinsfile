@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/your-org/your-python-project.git'
+                git branch: 'main', url: 'https://github.com/Rahul-Bristlecone/product-service.git'
             }
         }
         stage('Install Dependencies') {
