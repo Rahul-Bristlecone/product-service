@@ -1,34 +1,26 @@
 pipeline {
     agent any
-    environment {
-        APP_NAME = "product-service"
-        APP_VERSION = "1.0.0"
-        STAGE_NAME = "Build and Push Docker Image"
-        BUILD_NUMBER = "${env.BUILD_NUMBER}"
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds') 
-        IMAGE_NAME = "sharma92/daemons/product-service"
-    }
+
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Rahul-Bristlecone/product-service.git'
+                git branch: 'main', url: 'https://github.com/your-org/your-python-project.git'
             }
         }
-        stage('Build Docker Image') {
+        stage('Install Dependencies') {
             steps {
-                script {
-                    docker.build("${IMAGE_NAME}:${env.BUILD_NUMBER}")
-                }
+                sh 'pip install --upgrade pip'
+                sh 'pip install -r requirements.txt'
             }
         }
-        stage('Push to DockerHub') {
+        stage('Run Tests') {
             steps {
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
-                        docker.image("${IMAGE_NAME}:${env.BUILD_NUMBER}").push()
-                        docker.image("${IMAGE_NAME}:${env.BUILD_NUMBER}").push("latest")
-                    }
-                }
+                sh 'pytest --maxfail=1 --disable-warnings -q'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'python -m build'
             }
         }
     }
