@@ -16,7 +16,7 @@ The Product Service is built with modern Python frameworks and best practices:
 - **Containerization**: Multi-stage Docker builds for optimized production images
 - **Orchestration**: Kubernetes deployment with Helm charts for cloud-native deployment
 
-## Project Structure
+## Project Structure $ for authenticity
 
 ```
 product-service/
