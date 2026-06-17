@@ -38,7 +38,7 @@ product-service/
 │   └── utils/                      # Utility functions and helpers
 ├── migrations/                     # Alembic database migrations
 ├── tests/                          # Test suite
-│   ├── test_products.py           # Product endpoint tests
+│   ├── test_products.py           # Product endpoint tests # this is to do
 │   ├── integration/               # Integration tests
 │   └── unit/                      # Unit tests
 ├── deployment/                     # Deployment configurations
