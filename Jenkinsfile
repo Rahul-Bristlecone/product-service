@@ -2,11 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/Rahul-Bristlecone/product-service.git'
-            }
-        }
         stage('Install Dependencies') {
             steps {
                 sh 'pip install --upgrade pip'
