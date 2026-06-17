@@ -1,0 +1,11 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Runtime env files (never commit secrets)
+.env
+.env.*
+!.env.docker.example

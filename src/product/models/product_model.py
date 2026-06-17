@@ -1,4 +1,4 @@
-from product.extentions.db import db
+from src.product.extentions.db import db
 # docker exec -it user-service bash
 # python -m alembic revision --autogenerate -m "Added new column"
 # python -m alembic upgrade head

@@ -8,12 +8,12 @@ from flask_jwt_extended import JWTManager
 from flask_smorest import Api
 from flask_cors import CORS
 
-from product.extentions.db import db
+from src.product.extentions.db import db
 
 # Import all models to register them with SQLAlchemy
-from product.models.product_model import ProductModel
-from product.resources.products import blp as ProductBp
-from product.resources.health import health_bp as HealthBp
+from src.product.models.product_model import ProductModel
+from src.product.resources.products import blp as ProductBp
+from src.product.resources.health import health_bp as HealthBp
 
 # This is called factory pattern
 

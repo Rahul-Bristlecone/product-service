@@ -5,10 +5,10 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_smorest import Blueprint, abort
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 
-from product.extentions.db import db
-from product.extentions.redis_client import redis_client
-from product.models.product_model import ProductModel
-from product.schemas.product_schema import ProductSchema
+from src.product.extentions.db import db
+from src.product.extentions.redis_client import redis_client
+from src.product.models.product_model import ProductModel
+from src.product.schemas.product_schema import ProductSchema
 
 # Create blueprint for Products
 blp = Blueprint("products", __name__, description="Operations on products")
@@ -43,7 +43,7 @@ def get_user_product_or_404(product_id, user_id):
 
 def create_product_from_payload(product_data):
     """
-    Shared logic to create an order in the database.
+    Shared logic to create a product in the database.
     Validates JWT, checks Redis session, and persists the order.
     """
     user_id = int(get_jwt_identity())

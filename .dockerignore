@@ -1,0 +1,17 @@
+# VCS and local caches
+.git
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Keep local env files out of image/build context
+.env
+.env.*
+!.env.docker.example
+
+# Local build/venv artifacts
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
