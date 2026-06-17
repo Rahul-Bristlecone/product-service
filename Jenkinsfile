@@ -4,19 +4,34 @@ pipeline {
     stages {
         stage('Install Dependencies') {
             steps {
-                sh 'pip install --upgrade pip'
-                sh 'pip install -r requirements.txt'
+                sh '''
+                  python3 -m venv venv
+                  . venv/bin/activate
+                  pip install --upgrade pip
+                  pip install -e .
+                '''
             }
         }
         // stage('Run Tests') {
         //     steps {
-        //         sh 'pytest --maxfail=1 --disable-warnings -q'
+        //         sh '''
+        //           . venv/bin/activate
+        //           pytest --maxfail=1 --disable-warnings -q
+        //         '''
         //     }
         // }
         stage('Build') {
             steps {
-                sh 'python -m build'
+                sh '''
+                  . venv/bin/activate
+                  python -m build
+                '''
             }
+        }
+    }
+    post {
+        success {
+            archiveArtifacts artifacts: 'dist/*', fingerprint: true
         }
     }
 }
