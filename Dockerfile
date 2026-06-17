@@ -2,7 +2,7 @@
 # Stage 1: Builder stage
 # Purpose: Build and install Python dependencies in an isolated environment
 # -------------------------------
-FROM python:3.12-slim AS builder
+FROM python:3.12-alpine AS builder
 WORKDIR /app
 
 # Upgrade pip, setuptools, and wheel to latest versions
@@ -18,17 +18,16 @@ RUN pip install --no-cache-dir -r requirements.txt
 # This makes local modules available during dependency resolution
 COPY . ./product_service
 
-
 # -------------------------------
 # Stage 2: Final stage - Runtime environment
 # Purpose: Create a minimal, secure runtime image with only necessary artifacts
 # -------------------------------
-FROM python:3.12-slim
+FROM python:3.12-alpine
 WORKDIR /app
 
 # Create a dedicated non-root user for running the application
 # Running as non-root improves container security by limiting privileges
-RUN groupadd -r usergroup && useradd -r -g usergroup user
+RUN addgroup -S usergroup && adduser -S -G usergroup user
 
 # Copy installed dependencies and application code from builder stage
 # This avoids reinstalling dependencies in the final image, saving time and space

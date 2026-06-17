@@ -3,13 +3,13 @@ import pytest
 from unittest.mock import Mock, MagicMock, patch
 from datetime import date
 
-from product.resources.products import (
+from src.product.resources.products import (
     validate_active_session,
     get_user_product_or_404,
     create_product_from_payload,
 )
-from product.models.product_model import ProductModel
-from product.schemas.product_schema import ProductSchema
+from src.product.models.product_model import ProductModel
+from src.product.schemas.product_schema import ProductSchema
 
 
 @pytest.fixture
@@ -260,7 +260,7 @@ class TestCreateProductEndpoint:
 
     def test_create_product_success(self, app):
         """Test successful product creation via endpoint"""
-        from product.resources.products import blp
+        from src.product.resources.products import blp
         
         app.register_blueprint(blp)
         client = app.test_client()
