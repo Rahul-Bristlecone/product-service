@@ -3,7 +3,7 @@ from unittest.mock import patch
 import pytest
 from flask import Flask
 
-from src.product.main import create_app
+from product.main import create_app
 
 
 @pytest.fixture
