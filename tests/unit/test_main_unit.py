@@ -19,7 +19,7 @@ def env_vars(monkeypatch):
 
 def _create_app_without_db_side_effects():
     # The app factory currently calls db.create_all(), so we patch it to keep tests unit-level.
-    with patch("src.product.main.db.create_all") as _create_all:
+    with patch("product.main.db.create_all") as _create_all:
         return create_app()
 
 

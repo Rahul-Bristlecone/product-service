@@ -6,7 +6,7 @@ def test_redis_client_uses_env_values(monkeypatch):
     monkeypatch.setenv("REDIS_PORT", "6380")
     monkeypatch.setenv("REDIS_PASSWORD", "mypassword")
 
-    module = importlib.import_module("src.product.extentions.redis_client")
+    module = importlib.import_module("product.extentions.redis_client")
     module = importlib.reload(module)
 
     kwargs = module.redis_client.connection_pool.connection_kwargs
@@ -20,7 +20,7 @@ def test_redis_client_sets_empty_password_to_none(monkeypatch):
     monkeypatch.setenv("REDIS_PORT", "6379")
     monkeypatch.setenv("REDIS_PASSWORD", "")
 
-    module = importlib.import_module("src.product.extentions.redis_client")
+    module = importlib.import_module("product.extentions.redis_client")
     module = importlib.reload(module)
 
     kwargs = module.redis_client.connection_pool.connection_kwargs

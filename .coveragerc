@@ -2,7 +2,7 @@
 # Reference: https://coverage.readthedocs.io/en/latest/config.html
 
 [run]
-source = src
+source = product
 omit =
     */tests/*
     */migrations/*
