@@ -2,7 +2,7 @@ from datetime import date
 
 import pytest
 
-from src.product.models.product_model import ProductModel
+from product.models.product_model import ProductModel
 
 
 @pytest.fixture
