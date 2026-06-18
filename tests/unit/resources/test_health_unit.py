@@ -2,7 +2,7 @@ from unittest.mock import patch
 
 from flask import Flask
 
-from src.product.resources import health as health_module
+from product.resources import health as health_module
 
 
 def _build_app():
