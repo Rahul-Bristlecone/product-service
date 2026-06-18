@@ -4,8 +4,10 @@ __pycache__/
 .pytest_cache/
 .venv/
 venv/
+product_service.egg-info/
 
 # Runtime env files (never commit secrets)
 .env
 .env.*
 !.env.docker.example
+dist/

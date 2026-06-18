@@ -5,11 +5,10 @@ from src.product.extentions.redis_client import redis_client
 
 health_bp = Blueprint("health", __name__, description="Health check endpoints")
 
-startup_complete = False
+startup_complete = False  # module-level flag
 
 @health_bp.route("/startup")
 def startup():
-    global startup_complete
     return jsonify(status="UP" if startup_complete else "DOWN"), 200 if startup_complete else 503
 
 @health_bp.route("/readiness")
@@ -23,8 +22,4 @@ def readiness():
 
 @health_bp.route("/liveness")
 def liveness():
-    return jsonify(status="UP"), 200
-
-@health_bp.route("/startup")
-def startup():
     return jsonify(status="UP"), 200
