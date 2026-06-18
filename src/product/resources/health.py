@@ -1,7 +1,7 @@
 from flask_smorest import Blueprint
 from flask import jsonify
-from src.product.extentions.db import db
-from src.product.extentions.redis_client import redis_client
+from ..extentions.db import db
+from ..extentions.redis_client import redis_client
 
 health_bp = Blueprint("health", __name__, description="Health check endpoints")
 
