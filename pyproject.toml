@@ -16,6 +16,7 @@ dependencies = [
     "flask-smorest",
     "flask_sqlalchemy",
     "Flask==2.3.2",
+    "Werkzeug>=2.3.0,<3.0",
     "Jinja2==3.1.2",
     "marshmallow==3.19.0",
     "packaging==23.1",
