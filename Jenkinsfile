@@ -37,7 +37,7 @@ pipeline {
                 sh '''
                   . venv/bin/activate
                   pytest tests/unit \
-                    --cov=src \
+                    --cov=product \
                     --cov-report=term-missing \
                     --cov-report=html:htmlcov \
                     --cov-report=xml:coverage.xml \
