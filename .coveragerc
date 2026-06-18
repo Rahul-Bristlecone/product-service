@@ -1,0 +1,50 @@
+# Coverage configuration for product-service
+# Reference: https://coverage.readthedocs.io/en/latest/config.html
+
+[run]
+source = src
+omit =
+    */tests/*
+    */migrations/*
+    */__pycache__/*
+    */site-packages/*
+    */venv/*
+
+[report]
+# Exclude lines from coverage that are typically hard to test
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    raise AssertionError
+    raise NotImplementedError
+    if __name__ == .__main__.:
+    if TYPE_CHECKING:
+    @abstractmethod
+    @abstractproperty
+    ^\s*pass\s*$
+    ^\s*\.\.\.\s*$
+    ^\s*raise NotImplemented
+    except ImportError
+
+# Minimum coverage percentage to enforce (fail if below this)
+fail_under = 85
+
+# Display precision (number of decimal places)
+precision = 2
+
+# Skip files with 100% coverage from the report
+skip_covered = False
+
+# Show lines that weren't covered
+show_missing = True
+
+[html]
+directory = htmlcov
+
+[xml]
+output = coverage.xml
+
+[paths]
+source =
+    src
+    */site-packages
