@@ -69,20 +69,11 @@ pipeline {
                     reportDir: 'htmlcov',
                     reportFiles: 'index.html',
                     reportName: 'Code Coverage Report',
-                    keepAll: true
+                    keepAll: true,
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true
                 ])
                 
-                // Optional: publish Cobertura report if Cobertura plugin is installed
-                step([$class: 'CoberturaPublisher',
-                      autoUpdateHealth: false,
-                      autoUpdateStability: false,
-                      coberturaReportFile: 'coverage.xml',
-                      failUnhealthy: false,
-                      failUnstable: false,
-                      maxNumberOfBuilds: 0,
-                      onlyStable: false,
-                      sourceEncoding: 'ASCII',
-                      zoomCoverageChart: false])
             }
         }
     }
