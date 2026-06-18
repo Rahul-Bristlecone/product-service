@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         APP_NAME = 'product-service'
-        BUILD_TAG = "${env.GIT_BRANCH}-${env.BUILD_NUMBER}"
+        BUILD_TAG = "${env.BRANCH_NAME ? env.BRANCH_NAME : 'build'}-${env.BUILD_NUMBER}"
         // PYPI_TOKEN = credentials('pypi-token')   // Not needed yet, securely inject from Jenkins credentials
     }
 
@@ -52,6 +52,7 @@ pipeline {
             steps {
                 sh '''
                   . venv/bin/activate
+                  rm -rf dist/
                   python -m build
                   mv dist/*.whl dist/${BUILD_TAG}.whl
                 '''
