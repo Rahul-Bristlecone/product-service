@@ -5,10 +5,10 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_smorest import Blueprint, abort
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 
-from src.product.extentions.db import db
-from src.product.extentions.redis_client import redis_client
-from src.product.models.product_model import ProductModel
-from src.product.schemas.product_schema import ProductSchema
+from ..extentions.db import db
+from ..extentions.redis_client import redis_client
+from ..models.product_model import ProductModel
+from ..schemas.product_schema import ProductSchema
 
 # Create blueprint for Products
 blp = Blueprint("products", __name__, description="Operations on products")

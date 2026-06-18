@@ -8,7 +8,7 @@ from flask_jwt_extended import JWTManager
 from flask_smorest import Api
 from flask_cors import CORS
 
-from src.product.extentions.db import db
+from .extentions.db import db
 
 # Import all models to register them with SQLAlchemy
 from .models.product_model import ProductModel
