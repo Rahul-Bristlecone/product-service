@@ -46,6 +46,13 @@ dev = [
     "pytest-bdd>=7.3.0"
 ]
 
+[tool.setuptools]
+packages = ["product"]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "--cov=src --cov-report=term-missing --cov-report=html --cov-report=xml --cov-fail-under=85"

@@ -1,7 +1,7 @@
 import pytest
 from marshmallow import ValidationError
 
-from src.product.schemas.product_schema import ProductSchema
+from product.schemas.product_schema import ProductSchema
 
 
 def test_product_schema_loads_valid_payload(product_payload):

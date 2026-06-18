@@ -5,7 +5,7 @@ import pytest
 from flask import Flask
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 
-from src.product.resources.products import (
+from product.resources.products import (
     create_product_from_payload,
     get_user_product_or_404,
     validate_active_session,
