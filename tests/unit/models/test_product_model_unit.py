@@ -1,4 +1,4 @@
-from src.product.models.product_model import ProductModel
+from product.models.product_model import ProductModel
 
 
 def test_product_model_table_name_is_products():
