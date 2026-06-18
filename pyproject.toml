@@ -41,8 +41,37 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "pytest~=7.4.0",
+    "pytest-cov>=4.1.0",
+    "pytest-mock>=3.12.0",
     "pytest-bdd>=7.3.0"
 ]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+addopts = "--cov=src --cov-report=term-missing --cov-report=html --cov-report=xml --cov-fail-under=85"
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/migrations/*",
+    "*/__pycache__/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "^\\s*@abstractmethod",
+    "^\\s*pass\\s*$",
+]
+precision = 2
+skip_covered = false
+show_missing = true
+
+[tool.coverage.html]
+directory = "htmlcov"

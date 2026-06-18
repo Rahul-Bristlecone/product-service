@@ -11,3 +11,21 @@ product_service.egg-info/
 .env.*
 !.env.docker.example
 dist/
+
+# Coverage reporting
+htmlcov/
+coverage.xml
+.coverage
+.coverage.*
+*.cover
+check_coverage.sh
+check_coverage.ps1
+.hypothesis/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store

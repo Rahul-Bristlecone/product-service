@@ -276,6 +276,34 @@ pytest --cov=src tests/
 pytest --gherkin-terminal-reporter tests/
 ```
 
+### Coverage Gate
+
+This project enforces **minimum 85% code coverage** on all commits. Coverage is automatically checked in CI/CD pipelines and will fail the build if the threshold is not met.
+
+**Check coverage locally:**
+
+Windows (PowerShell):
+```powershell
+.\check_coverage.ps1 -Html
+```
+
+Linux/macOS:
+```bash
+./check_coverage.sh --html
+```
+
+Manual check:
+```bash
+pytest tests/unit --cov=src --cov-report=term-missing --cov-fail-under=85
+```
+
+Coverage reports are generated in:
+- **HTML**: `htmlcov/index.html` — Interactive line-by-line view
+- **XML**: `coverage.xml` — For CI/CD integrations
+- **Terminal**: Console output with missing lines
+
+See [COVERAGE.md](COVERAGE.md) for detailed coverage documentation and improvement guidelines.
+
 ## Database Migrations
 
 Manage database schema changes using Alembic:

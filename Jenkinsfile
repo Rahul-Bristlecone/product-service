@@ -31,15 +31,21 @@ pipeline {
             }
         }
 
-        // Tests will be included later
-        // stage('Run Tests') {
-        //     steps {
-        //         sh '''
-        //           . venv/bin/activate
-        //           pytest --maxfail=1 --disable-warnings -q
-        //         '''
-        //     }
-        // }
+        stage('Run Tests with Coverage') {
+            steps {
+                sh '''
+                  . venv/bin/activate
+                  pytest tests/unit \
+                    --cov=src \
+                    --cov-report=term-missing \
+                    --cov-report=html:htmlcov \
+                    --cov-report=xml:coverage.xml \
+                    --cov-fail-under=80 \
+                    --maxfail=1 \
+                    --disable-warnings -v
+                '''
+            }
+        }
 
         stage('Build/Package') {
             steps {
@@ -54,6 +60,29 @@ pipeline {
         stage('Archive Artifacts') {
             steps {
                 archiveArtifacts artifacts: "dist/${BUILD_TAG}.whl", fingerprint: true
+                
+                // Archive coverage reports
+                archiveArtifacts artifacts: "htmlcov/**,coverage.xml", allowEmptyArchive: true
+                
+                // Publish code coverage metrics
+                publishHTML([
+                    reportDir: 'htmlcov',
+                    reportFiles: 'index.html',
+                    reportName: 'Code Coverage Report',
+                    keepAll: true
+                ])
+                
+                // Optional: publish Cobertura report if Cobertura plugin is installed
+                step([$class: 'CoberturaPublisher',
+                      autoUpdateHealth: false,
+                      autoUpdateStability: false,
+                      coberturaReportFile: 'coverage.xml',
+                      failUnhealthy: false,
+                      failUnstable: false,
+                      maxNumberOfBuilds: 0,
+                      onlyStable: false,
+                      sourceEncoding: 'ASCII',
+                      zoomCoverageChart: false])
             }
         }
     }
