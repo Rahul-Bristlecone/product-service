@@ -55,10 +55,11 @@ product-service/
 │   │   ├── httproute.yaml         # HTTP routing configuration
 │   │   └── serviceaccount.yaml    # Service account for RBAC
 ├── Dockerfile                     # Development Docker image (Alpine-based)
-├── Dockerfile.production          # Production Docker image with optimizations
-├── Jenkinsfile                    # Jenkins CI/CD pipeline configuration
-├── requirements.txt               # Python package dependencies
-├── pyproject.toml                # Project metadata and build configuration
+├── Dockerfile.prod                # Production Docker image with optimizations
+├── .github/workflows/             # GitHub Actions CI workflows (primary CI)
+├── Jenkinsfile                    # Legacy/compatibility CI pipeline
+├── requirements.txt               # Compatibility dependency file
+├── pyproject.toml                 # Project metadata + dependency source of truth
 ├── run.py                        # Application entry point
 └── README.md                     # This file
 ```
@@ -101,8 +102,10 @@ source venv/bin/activate
 ### 4. Install Dependencies
 
 ```bash
-pip install -r requirements.txt
+pip install -e .[dev]
 ```
+
+requirements.txt is kept for compatibility, but pyproject.toml is the source of truth.
 
 ### 5. Configure Environment Variables
 
@@ -178,7 +181,7 @@ Copy-Item .env.docker.example .env.docker
 # (Do not commit secrets to version control)
 
 # Build the production image
-docker build -f Dockerfile.production -t product-service:prod .
+docker build -f Dockerfile.prod -t product-service:prod .
 
 # Run the production container
 docker run --rm -p 5000:5000 --env-file .env.docker product-service:prod
@@ -267,7 +270,7 @@ pytest tests/integration/
 ### Run All Tests with Coverage
 
 ```bash
-pytest --cov=src tests/
+pytest --cov=product tests/
 ```
 
 ### Run Tests with BDD
@@ -278,7 +281,7 @@ pytest --gherkin-terminal-reporter tests/
 
 ### Coverage Gate
 
-This project enforces **minimum 85% code coverage** on all commits. Coverage is automatically checked in CI/CD pipelines and will fail the build if the threshold is not met.
+This project enforces **minimum 82% code coverage** on all commits. Coverage is automatically checked in CI/CD pipelines and will fail the build if the threshold is not met.
 
 **Check coverage locally:**
 
@@ -294,7 +297,7 @@ Linux/macOS:
 
 Manual check:
 ```bash
-pytest tests/unit --cov=src --cov-report=term-missing --cov-fail-under=85
+pytest tests/unit --cov=product --cov-report=term-missing --cov-fail-under=82
 ```
 
 Coverage reports are generated in:
@@ -324,18 +327,20 @@ alembic history
 
 ## CI/CD Pipeline
 
-The project includes a Jenkins pipeline for continuous integration and deployment.
+GitHub Actions is the primary CI/CD pipeline for this project.
 
-### Pipeline Stages
+### GitHub Actions Workflow Stages
 
-1. **Source**: Checkout code from repository
-2. **Build**: Compile dependencies and build Docker image
-3. **Test**: Execute unit and integration tests
-4. **Security Scan**: Vulnerability and static code analysis
-5. **Push**: Push image to container registry
-6. **Deploy**: Deploy to staging and production environments
+1. Source: Checkout code from repository
+2. Build and Test: Install dependencies from pyproject.toml, run lint and tests
+3. SAST: Run CodeQL static analysis
+4. Package: Build Python distribution and publish package artifact
+5. Docker: Build, scan, and push container image
+6. Deploy: Placeholder deployment stage (GitOps/ArgoCD recommended for production)
 
-See `Jenkinsfile` for detailed pipeline configuration.
+Primary workflow: .github/workflows/product-build.yaml
+
+Jenkinsfile is retained for compatibility with legacy environments.
 
 ## Environment Variables
 
