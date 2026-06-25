@@ -7,11 +7,11 @@ on:
 jobs:
   sast:
     name: Security Analysis
-    uses: ./.github/workflows/sast.yaml
+    uses: https://github.com/Rahul-Bristlecone/user-account-service.git/.github/workflows/sast.yaml
     with:
       target-environment: production
     secrets: inherit
-    
+
   ci:
     name: Build and Test
     needs: sast
