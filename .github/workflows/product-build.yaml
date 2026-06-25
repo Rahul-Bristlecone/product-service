@@ -156,10 +156,10 @@ jobs:
           #   | docker login --username AWS \
           #     --password-stdin 123456789012.dkr.ecr.us-east-1.amazonaws.com
 
-# deploy is a next step, but understand this part, we don't usually include it in the pipeline,
-# For testing purpose, we can include it in the pipeline, but for production, 
-# we will use gitops like ArgoCD to deploy the image to the kubernetes cluster.
-deploy:
+  # deploy is a next step, but understand this part, we don't usually include it in the pipeline,
+  # For testing purpose, we can include it in the pipeline, but for production,
+  # we will use gitops like ArgoCD to deploy the image to the kubernetes cluster.
+  deploy:
     runs-on: ubuntu-latest
     needs: docker
     if: github.event_name == 'push'
