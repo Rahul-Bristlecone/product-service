@@ -4,7 +4,7 @@ on:
     branches:
       - main
 jobs:
-  build and test:
+  build_and_test:
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
@@ -73,7 +73,7 @@ jobs:
     name: Build and package the product service
     runs-on: ubuntu-latest
     needs: 
-      - build and test
+      - build_and_test
       - sast
     permissions:
       id-token: write
