@@ -1,4 +1,4 @@
-name: user service build
+name: Product service build
 on:
   push:
     branches:
@@ -7,7 +7,7 @@ on:
 jobs:
   sast:
     name: Security Analysis
-    uses: https://github.com/Rahul-Bristlecone/user-account-service.git/.github/workflows/sast.yaml
+    uses: Rahul-Bristlecone/user-account-service/.github/workflows/sast.yaml@main
     with:
       target-environment: production
     secrets: inherit
@@ -15,9 +15,9 @@ jobs:
   ci:
     name: Build and Test
     needs: sast
-    uses: https://github.com/Rahul-Bristlecone/user-account-service.git/.github/workflows/reusable-ci.yaml
+    uses: Rahul-Bristlecone/user-account-service/.github/workflows/reusable-ci.yaml@main
     with:
-      service-name: user-service
+      service-name: product-service
       docker-repo: daemons
       target-environment: production
     secrets: inherit
