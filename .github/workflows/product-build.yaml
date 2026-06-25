@@ -8,7 +8,7 @@ jobs:
   ci:
     name: Build and Test
     needs: sast
-    uses: https://github.com/Rahul-Bristlecone/user-account-service.git/.github/workflows/common-reusable.yaml
+    uses: https://github.com/Rahul-Bristlecone/user-account-service.git/.github/workflows/reusable-ci.yaml
     with:
       service-name: user-service
       docker-repo: daemons
