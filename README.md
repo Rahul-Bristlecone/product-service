@@ -38,9 +38,15 @@ product-service/
 │   └── utils/                      # Utility functions and helpers
 ├── migrations/                     # Alembic database migrations
 ├── tests/                          # Test suite
-│   ├── test_products.py           # Product endpoint tests
-│   ├── integration/               # Integration tests
-│   └── unit/                      # Unit tests
+│   ├── integration/                # Integration tests (currently empty placeholder)
+│   └── unit/                       # Unit tests
+│       ├── conftest.py
+│       ├── test_main_unit.py
+│       ├── test_package_init_unit.py
+│       ├── extentions/
+│       ├── models/
+│       ├── resources/
+│       └── schemas/
 ├── deployment/                     # Deployment configurations
 │   └── K8s/                       # Kubernetes manifests
 │       └── product-deployment.yaml
@@ -107,6 +113,12 @@ pip install -e .[dev]
 
 requirements.txt is kept for compatibility, but pyproject.toml is the source of truth.
 
+Compatibility-only install option:
+
+```bash
+pip install -r requirements.txt
+```
+
 ### 5. Configure Environment Variables
 
 Create a `.env` file in the project root with the following variables:
@@ -166,7 +178,7 @@ Build and run the development Docker image with live reload support:
 docker build -t product-service:dev .
 
 # Run the development container
-docker run --rm -p 5000:5000 --env-file .env.docker product-service:dev
+docker run --rm -p 5000:5000 --env-file .env product-service:dev
 ```
 
 ### Production Docker Image
@@ -174,17 +186,14 @@ docker run --rm -p 5000:5000 --env-file .env.docker product-service:dev
 For production deployments with optimized multi-stage builds:
 
 ```bash
-# Create environment file from template
-Copy-Item .env.docker.example .env.docker
-
-# Edit .env.docker with production values
+# Edit .env with production values
 # (Do not commit secrets to version control)
 
 # Build the production image
 docker build -f Dockerfile.prod -t product-service:prod .
 
 # Run the production container
-docker run --rm -p 5000:5000 --env-file .env.docker product-service:prod
+docker run --rm -p 5000:5000 --env-file .env product-service:prod
 ```
 
 ### Docker Compose (if available)
@@ -331,14 +340,15 @@ GitHub Actions is the primary CI/CD pipeline for this project.
 
 ### GitHub Actions Workflow Stages
 
-1. Source: Checkout code from repository
-2. Build and Test: Install dependencies from pyproject.toml, run lint and tests
-3. SAST: Run CodeQL static analysis
-4. Package: Build Python distribution and publish package artifact
-5. Docker: Build, scan, and push container image
-6. Deploy: Placeholder deployment stage (GitOps/ArgoCD recommended for production)
+1. SAST: Invokes reusable security workflow
+2. CI: Invokes reusable build and test workflow after SAST succeeds
 
 Primary workflow: .github/workflows/product-build.yaml
+
+Reusable workflows referenced by the pipeline:
+
+- Rahul-Bristlecone/user-account-service/.github/workflows/sast.yaml@main
+- Rahul-Bristlecone/user-account-service/.github/workflows/reusable-ci.yaml@main
 
 Jenkinsfile is retained for compatibility with legacy environments.
 
