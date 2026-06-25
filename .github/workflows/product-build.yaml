@@ -5,6 +5,13 @@ on:
       - main
 
 jobs:
+  sast:
+    name: Security Analysis
+    uses: ./.github/workflows/sast.yaml
+    with:
+      target-environment: production
+    secrets: inherit
+    
   ci:
     name: Build and Test
     needs: sast
