@@ -2,9 +2,16 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
 .venv/
 venv/
 product_service.egg-info/
+build/
+*.egg-info/
+*.log
 
 # Runtime env files (never commit secrets)
 .env
@@ -18,8 +25,6 @@ coverage.xml
 .coverage
 .coverage.*
 *.cover
-check_coverage.sh
-check_coverage.ps1
 .hypothesis/
 
 # IDEs and editors

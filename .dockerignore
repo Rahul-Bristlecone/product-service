@@ -1,8 +1,14 @@
 # VCS and local caches
 .git
+.github
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.tox/
+.nox/
 
 # Keep local env files out of image/build context
 .env
@@ -15,3 +21,21 @@ venv/
 dist/
 build/
 *.egg-info/
+
+# Test and coverage artifacts
+tests/
+htmlcov/
+coverage.xml
+.coverage
+.coverage.*
+*.cover
+check_coverage.sh
+check_coverage.ps1
+
+# Editor/docs and local-only assets
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
